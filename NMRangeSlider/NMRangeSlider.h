@@ -9,7 +9,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NMRangeSlider : UIControl
+@protocol NMRangeSliderDelegate<NSObject>
+@optional
+-(void)onValueChangeForSlider:(UIControl *)slider inValue:(float)value;
+@end
+
+@interface NMRangeSlider : UIControl{
+    // Delegate to respond back
+    id <NMRangeSliderDelegate> _delegate;
+
+}
+@property (nonatomic,strong) id delegate;
 
 // default 0.0
 @property(assign, nonatomic) float minimumValue;

@@ -620,6 +620,10 @@ NSUInteger DeviceSystemMajorVersion() {
             [self bringSubviewToFront:_lowerHandle];
             
             [self setLowerValue:newValue animated:_stepValueContinuously ? YES : NO];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(onValueChangeForSlider:inValue:)]) {
+                [self.delegate onValueChangeForSlider:self inValue:newValue];
+            }
+
         }
         else
         {
@@ -638,6 +642,9 @@ NSUInteger DeviceSystemMajorVersion() {
             _lowerHandle.highlighted=NO;
             [self bringSubviewToFront:_upperHandle];
             [self setUpperValue:newValue animated:_stepValueContinuously ? YES : NO];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(onValueChangeForSlider:inValue:)]) {
+                [self.delegate onValueChangeForSlider:self inValue:newValue];
+            }
         }
         else
         {
